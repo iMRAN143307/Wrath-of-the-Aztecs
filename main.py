@@ -1,3 +1,3 @@
 import pygame
 
-print("helloa")
+pygame.display.flip()
