@@ -31,17 +31,15 @@ while running:
                 #soft platforms would use just this, hard platforms would use this plus the other 3
             elif player_pos.x + player_pos.w > platform.x and player_pos.x + player_pos.w < platform.x + platform.w and player_pos.y + player_pos.h > platform.y and player_pos.y + player_pos.h < platform.y + platform.h:
                 player_pos.x = platform.x - player_pos.w
-                print("left")
             elif player_pos.x < platform.x + platform.w and player_pos.x > platform.x and player_pos.y + player_pos.h > platform.y and player_pos.y + player_pos.h < platform.y + platform.h:
                 player_pos.x = platform.x + platform.w
-                print("right")
-            elif player_pos.y < platform.y + platform.h:
+            elif player_pos.x + player_pos.w > platform.x and player_pos.x < platform.x + platform.w and player_pos.y < platform.y + platform.h and player_pos.y > platform.y:
                 player_pos.y = platform.y + platform.h
-                print("up")
+                jumping = 0
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and grounded == True and jumping == 0:
-        jumping = 7000
+        jumping = 3000
     if keys[pygame.K_s] and grounded == False:
         player_pos.y += 1200 * dt
     if keys[pygame.K_a]:
