@@ -1,3 +1,6 @@
+
+import random
+
 import pygame
 
 SONG_END = pygame.USEREVENT + 1
@@ -7,10 +10,9 @@ pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 song0 = "aw1.wav"
 song1 = "aw2.wav"
-song2 = "gbd3.wav"
-playlist = [song0, song1, song2]
+playlist = [song0, song1]
 pygame.mixer.music.set_endevent(SONG_END)
-pygame.mixer.music.load(song0)
+pygame.mixer.music.load(random.choice(playlist))
 pygame.mixer.music.play()
 clock = pygame.time.Clock()
 running = True
@@ -19,11 +21,22 @@ jumping = 0
 grounded = False
 song_index = 0
 platforms_on_screen = []
-all_platforms = [pygame.Rect(600, 400, 200, 50), pygame.Rect(850, 180, 200, 50), pygame.Rect(1200, 200, 50, 520)]
+all_platforms = [
+    pygame.Rect(600, 400, 200, 50),
+    pygame.Rect(850, 180, 200, 50),
+    pygame.Rect(1200, 200, 50, 520),
+    pygame.Rect(1400, 480, 250, 75),
+    pygame.Rect(1925, 275, 80, 600),
+    pygame.Rect(2400, 190, 100, 225),
+    pygame.Rect(2566, 520, 150, 50),
+    pygame.Rect(3000, 150, 75, 600)
+]
 player_pos = pygame.Rect(screen.get_width() / 2, 600, 50, 100)
 camera_x = 0
-timer = 60
+timer = 62.0
 integer_timer = "START"
+fontObj = pygame.font.Font(None, 64)
+textSufaceObj = fontObj.render(integer_timer, True, (255, 255, 255), None)
 
 while running:
     for event in pygame.event.get():
@@ -89,18 +102,19 @@ while running:
             if platform.x < 1280 or platform.x + platform.w > 0:
                 platforms_on_screen.append(platform)
 
+    if str(int(timer)) != integer_timer and int(timer) < 61:
+        integer_timer = str(int(timer))
+
+    timer -= dt
+
     screen.fill("black")
+
+    screen.blit(fontObj.render(integer_timer, True, (255, 255, 255), None), (640, 50))
 
     for platform in platforms_on_screen:
         pygame.draw.rect(screen, "yellow", platform)
 
     pygame.draw.rect(screen, "white", player_pos)
-
-    if int(timer) != integer_timer:
-        integer_timer = int(timer)
-        #put integer_timer as text on the screen
-
-    timer -= dt
 
     pygame.display.flip()
 
