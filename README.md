@@ -8,8 +8,6 @@ You can play it at https://imran143307.itch.io/wrath-of-the-aztecs
 
 This game was made in Pygame, and the music made in Bosca Ceoil
 
-All of the game's code and assets are on the 'master' branch
-
 Feel free to contribute to the code by creating a new branch or forking the repo
 
 Credit to my friend 'frogger3' for making the art
